@@ -6,36 +6,53 @@ export default function Spark({ scene1Ref }) {
   const [hasPlayed, setHasPlayed] = useState(false);
   const [animateContent, setAnimateContent] = useState(false);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasPlayed) {
-          setIsVisible(true);
-          setHasPlayed(true);
-          if (videoRef.current) {
-            videoRef.current.play();
-          }
-          // Delay content animation for better effect
-          setTimeout(() => {
-            setAnimateContent(true);
-          }, 500);
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting && !hasPlayed) {
+        setIsVisible(true);
+        setHasPlayed(true);
+        if (videoRef.current) {
+          videoRef.current.play();
         }
-      },
-      {
-        threshold: 0.3, // Trigger when 30% of the section is visible
+        setTimeout(() => {
+          setAnimateContent(true);
+        }, 500);
       }
-    );
-
-    if (scene1Ref.current) {
-      observer.observe(scene1Ref.current);
+    },
+    {
+      threshold: 0.3,
     }
+  );
 
-    return () => {
-      if (scene1Ref.current) {
-        observer.unobserve(scene1Ref.current);
-      }
-    };
-  }, [scene1Ref, hasPlayed]);
+  const video = videoRef.current;
+
+  // ⏱ Stop video at 8 seconds
+  const handleTimeUpdate = () => {
+    if (video && video.currentTime >= 8) {
+      video.pause();
+      video.currentTime = 8; // Ensure it stays exactly at 8s
+      video.removeEventListener('timeupdate', handleTimeUpdate);
+    }
+  };
+
+  if (video) {
+    video.addEventListener('timeupdate', handleTimeUpdate);
+  }
+
+  if (scene1Ref.current) {
+    observer.observe(scene1Ref.current);
+  }
+
+  return () => {
+    if (scene1Ref.current) {
+      observer.unobserve(scene1Ref.current);
+    }
+    if (video) {
+      video.removeEventListener('timeupdate', handleTimeUpdate);
+    }
+  };
+}, [scene1Ref, hasPlayed]);
 
   return (
     <section ref={scene1Ref} className="relative min-h-screen overflow-hidden">
