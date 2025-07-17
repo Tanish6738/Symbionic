@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect, Suspense, useMemo } from 'react';
+import React, { useRef, useLayoutEffect, Suspense, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Environment, Float } from '@react-three/drei';
 import { useSpring, a } from '@react-spring/three';
@@ -258,6 +258,18 @@ export default function Hero() {
   const heroRef = useRef(null);
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useLayoutEffect(() => {
     const title = titleRef.current;
@@ -321,9 +333,16 @@ export default function Hero() {
             <AnimatedSphere />
           </Float> */}
 
-          <VerticalSpiral position={[-6, 0, 0]} turns={5} color="#222" />
-          {/* ExplodingTorus At Bottom Right */}
-          <ExplodingTorus position={[6, -3, 0]} color="#10B981" />
+          {/* Only show spiral on larger screens */}
+          {!isMobile && (
+            <VerticalSpiral position={[-6, 0, 0]} turns={5} color="#222" />
+          )}
+          
+          {/* ExplodingTorus - center on mobile, right side on desktop */}
+          <ExplodingTorus 
+            position={isMobile ? [0, 0, 0] : [6, 0, 0]} 
+            color="#10B981" 
+          />
           <Environment preset="studio" />
         </Suspense>
         <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
@@ -335,7 +354,8 @@ export default function Hero() {
           ref={titleRef}
           className="text-5xl md:text-7xl font-bold opacity-0 drop-shadow-lg"
         >
-          Welcome to Symbionic
+          Welcome to
+          <span className="text-orange-500"> Symbionic</span>
         </h1>
         <p
           ref={subtitleRef}
@@ -347,3 +367,5 @@ export default function Hero() {
     </section>
   );
 }
+
+

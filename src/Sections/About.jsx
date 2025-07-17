@@ -158,30 +158,8 @@ export default function About() {
         },
       });
 
-      // --- Scene 5: The Promise - Symbionic's Core ---
-      gsap.from(scene5Ref.current.querySelectorAll(".final-reveal"), {
-        opacity: 0,
-        y: 40,
-        stagger: 0.3,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: scene5Ref.current,
-          start: "top 75%",
-          toggleActions: "play none none none",
-        },
-      });
-
-      gsap.from(scene5Ref.current.querySelector(".cta-button"), {
-        opacity: 0,
-        scale: 0.8,
-        delay: 0.8,
-        ease: "elastic.out(1, 0.5)",
-        scrollTrigger: {
-          trigger: scene5Ref.current,
-          start: "top 60%",
-          toggleActions: "play none none none",
-        },
-      });
+      // Scene 5 animations are handled within the Promise component itself
+      // to avoid conflicts and ensure proper timing
     }, main); // <- use main as the scope!
 
     // Cleanup function for GSAP context

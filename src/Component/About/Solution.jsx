@@ -69,24 +69,40 @@ export default function Solution({ scene3Ref }) {
           >
             <div className="panel-content">
               <div className="panel-text">
-                <h3 className="panel-title">{panel.title}</h3>
-                <p className="panel-subtitle">{panel.subtitle}</p>
+                <div className="title-container">
+                  <h3 className="panel-title">
+                    <span className="title-text">{panel.title}</span>
+                    <div className="title-underline"></div>
+                  </h3>
+                </div>
+                <p className="panel-subtitle">
+                  <span className="subtitle-icon">✦</span>
+                  {panel.subtitle}
+                </p>
                 {activePanel === index && (
-                  <p className="panel-description">{panel.description}</p>
+                  <div className="panel-description-container">
+                    <p className="panel-description">{panel.description}</p>
+                    <div className="description-accent"></div>
+                  </div>
                 )}
               </div>
               
-              <div className="panel-video">
-                {/* <video
-                  ref={el => videoRefs.current[index] = el}
-                  src={panel.video}
-                  loop
-                  muted
-                  playsInline
-                  className="video-player"
-                /> */}
-                <img src={panel.img} alt="" />
-                <div className={`video-overlay bg-gradient-to-r ${panel.color}`}></div>
+              <div className="panel-visual">
+                <div className="image-container">
+                  <img src={panel.img} alt={panel.title} className="panel-image" />
+                  <div className="image-overlay"></div>
+                </div>
+                <div className={`gradient-overlay bg-gradient-to-r ${panel.color}`}></div>
+                <div className="floating-elements">
+                  <div className="floating-dot dot-1"></div>
+                  <div className="floating-dot dot-2"></div>
+                  <div className="floating-dot dot-3"></div>
+                </div>
+                {activePanel === index && (
+                  <div className="panel-number">
+                    <span className="number-text">{String(index + 1).padStart(2, '0')}</span>
+                  </div>
+                )}
               </div>
             </div>
           </div>

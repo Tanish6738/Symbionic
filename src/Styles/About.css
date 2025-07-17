@@ -124,100 +124,284 @@ body {
   padding: 2rem 1rem;
   color: white;
   text-align: center;
+  overflow: hidden;
 }
 
 .panel-text {
   z-index: 10;
   position: relative;
   width: 100%;
+  max-width: 400px;
+}
+
+/* Enhanced Title Styling */
+.title-container {
+  position: relative;
+  margin-bottom: 1.5rem;
 }
 
 .panel-title {
   font-size: 1.8rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
-  transition: all 0.3s ease;
+  margin-bottom: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   writing-mode: vertical-rl;
   text-orientation: mixed;
+  position: relative;
+  overflow: hidden;
+}
+
+.title-text {
+  display: inline-block;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.title-underline {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #f97316, #fb923c);
+  border-radius: 2px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%);
+}
+
+.accordion-panel.active .title-underline {
+  width: 100%;
 }
 
 .accordion-panel.active .panel-title {
   writing-mode: horizontal-tb;
   text-orientation: initial;
-  font-size: 2.2rem;
+  font-size: 2.4rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
+/* Enhanced Subtitle Styling */
 .panel-subtitle {
   font-size: 1.1rem;
   opacity: 0.9;
   margin-bottom: 1rem;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   writing-mode: vertical-rl;
   text-orientation: mixed;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.subtitle-icon {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+  color: #f97316;
+}
+
+.accordion-panel.active .subtitle-icon {
+  opacity: 1;
+  transform: rotate(180deg);
 }
 
 .accordion-panel.active .panel-subtitle {
   writing-mode: horizontal-tb;
   text-orientation: initial;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
+  opacity: 1;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Enhanced Description Styling */
+.panel-description-container {
+  position: relative;
+  margin-top: 1.5rem;
 }
 
 .panel-description {
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: 1.8;
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s ease forwards;
-  animation-delay: 0.3s;
+  transform: translateY(30px) scale(0.95);
+  animation: fadeInScale 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: 0.2s;
   display: none;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.description-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #f97316, #fb923c);
+  border-radius: 0 2px 2px 0;
 }
 
 .accordion-panel.active .panel-description {
   display: block;
 }
 
-.panel-video {
+/* Enhanced Visual Section */
+.panel-visual {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 1;
+  overflow: hidden;
 }
 
-.video-player {
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.panel-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.3;
-  transition: opacity 0.6s ease;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: brightness(0.7) contrast(1.1);
+  transform: scale(1.1);
 }
 
-.accordion-panel.active .video-player {
-  opacity: 0.8;
+.accordion-panel.active .panel-image {
+  transform: scale(1);
+  filter: brightness(0.8) contrast(1.2);
 }
 
-.video-overlay {
+.image-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.7;
-  transition: opacity 0.6s ease;
+  background: rgba(0, 0, 0, 0.4);
+  transition: all 0.6s ease;
 }
 
-.accordion-panel.active .video-overlay {
-  opacity: 0.3;
+.accordion-panel.active .image-overlay {
+  background: rgba(0, 0, 0, 0.2);
 }
 
-.accordion-panel:hover .panel-title {
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  mix-blend-mode: overlay;
+}
+
+.accordion-panel.active .gradient-overlay {
+  opacity: 0.6;
+}
+
+/* Floating Elements for Visual Interest */
+.floating-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.floating-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.dot-1 {
+  top: 20%;
+  left: 20%;
+  animation: float1 4s ease-in-out infinite;
+}
+
+.dot-2 {
+  top: 60%;
+  right: 25%;
+  animation: float2 3s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.dot-3 {
+  bottom: 30%;
+  left: 30%;
+  animation: float3 5s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.accordion-panel.active .floating-dot {
+  opacity: 1;
+}
+
+/* Panel Number Display */
+.panel-number {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  opacity: 0;
+  transform: scale(0.8) rotate(-10deg);
+  animation: numberAppear 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: 0.4s;
+}
+
+.number-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Hover Effects */
+.accordion-panel:hover .panel-title .title-text {
+  transform: translateY(-2px);
   color: #f97316;
-  transform: translateY(-10px);
 }
 
-.accordion-panel:hover .video-overlay {
-  opacity: 0.5;
+.accordion-panel:hover .floating-dot {
+  opacity: 0.8;
+  transform: scale(1.2);
+}
+
+.accordion-panel:hover .panel-image {
+  transform: scale(1.05);
+}
+
+.accordion-panel:hover .gradient-overlay {
+  opacity: 0.7;
 }
 
 /* Responsive Design */
@@ -273,12 +457,75 @@ body {
   .panel-description {
     font-size: 0.9rem;
   }
+  
+  .panel-number {
+    width: 50px;
+    height: 50px;
+    top: 1rem;
+    right: 1rem;
+  }
+  
+  .number-text {
+    font-size: 1.2rem;
+  }
+  
+  .floating-dot {
+    width: 6px;
+    height: 6px;
+  }
 }
 
 @keyframes fadeInUp {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes numberAppear {
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes float1 {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  33% {
+    transform: translateY(-15px) translateX(10px);
+  }
+  66% {
+    transform: translateY(5px) translateX(-5px);
+  }
+}
+
+@keyframes float2 {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) translateX(-8px) rotate(180deg);
+  }
+}
+
+@keyframes float3 {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) scale(1);
+  }
+  25% {
+    transform: translateY(-8px) translateX(12px) scale(1.1);
+  }
+  75% {
+    transform: translateY(8px) translateX(-6px) scale(0.9);
   }
 }
 
@@ -312,4 +559,60 @@ body {
   .accordion-header p {
     font-size: 1rem;
   }
+  
+  .panel-description {
+    font-size: 0.8rem;
+    padding: 0.8rem;
+  }
+  
+  .panel-number {
+    width: 40px;
+    height: 40px;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+  
+  .number-text {
+    font-size: 1rem;
+  }
+  
+  .floating-dot {
+    width: 4px;
+    height: 4px;
+  }
+  
+  .title-underline {
+    height: 2px;
+  }
+}
+
+/* Promise Component Styles */
+.final-reveal {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  color: inherit !important;
+  visibility: visible !important;
+}
+
+.impact-statement {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  color: inherit !important;
+  visibility: visible !important;
+}
+
+.cta-button {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+  visibility: visible !important;
+}
+
+/* Ensure text colors are properly inherited */
+.story-scene .final-reveal {
+  color: inherit;
+}
+
+.story-scene .impact-statement {
+  color: inherit;
 }
