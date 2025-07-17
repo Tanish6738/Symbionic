@@ -157,25 +157,25 @@ export default function Promise({ scene5Ref }) {
         <div className="grid grid-cols-2 gap-4 p-4 bg-black/20">
           <img
             ref={(el) => setImgRef(el, 0)}
-            src="public/Images/Selfi.avif"
+            src="/Images/Selfi.avif"
             alt="Description 2"
             className="h-40 w-full object-cover rounded-lg shadow-lg"
           />
           <img
             ref={(el) => setImgRef(el, 1)}
-            src="public/Images/pin.avif"
+            src="/Images/pin.avif"
             alt="Description 1"
             className="h-40 w-full object-cover rounded-lg shadow-lg"
           />
           <img
             ref={(el) => setImgRef(el, 2)}
-            src="public/Images/lady.jpg"
+            src="/Images/lady.jpg"
             alt="Description 3"
             className="h-40 w-full object-cover rounded-lg shadow-lg"
           />
           <img
             ref={(el) => setImgRef(el, 3)}
-            src="public/Images/flower.jpg"
+            src="/Images/flower.jpg"
             alt="Description 4"
             className="h-40 w-full object-cover rounded-lg shadow-lg"
           />
@@ -210,25 +210,25 @@ export default function Promise({ scene5Ref }) {
         <div>
           <img
             ref={(el) => setImgRef(el, 0)}
-            src="public/Images/Selfi.avif"
+            src="/Images/Selfi.avif"
             alt="Description 2"
             className="h-68 object-cover absolute bottom-0 right-0 m-4 rounded-lg shadow-lg"
           />
           <img
             ref={(el) => setImgRef(el, 1)}
-            src="public/Images/pin.avif"
+            src="/Images/pin.avif"
             alt="Description 1"
             className="h-68 w-64 object-cover absolute bottom-0 left-0 m-4 rounded-lg shadow-lg"
           />
           <img
             ref={(el) => setImgRef(el, 2)}
-            src="public/Images/lady.jpg"
+            src="/Images/lady.jpg"
             alt="Description 3"
             className="h-68 object-cover absolute top-0 left-0 m-4 rounded-lg shadow-lg"
           />
           <img
             ref={(el) => setImgRef(el, 3)}
-            src="public/Images/flower.jpg"
+            src="/Images/flower.jpg"
             alt="Description 4"
             className="h-68 w-64 object-cover absolute top-0 right-0 m-4 rounded-lg shadow-lg"
           />
