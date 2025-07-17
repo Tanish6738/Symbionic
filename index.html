@@ -8,6 +8,23 @@
   </head>
   <body class="bg-black">
     <div id="root"></div>
+    <script>
+      // Polyfill for Node.js globals in browser
+      if (typeof global === 'undefined') {
+        window.global = window;
+      }
+      if (typeof process === 'undefined') {
+        window.process = {
+          env: {},
+          version: '',
+          platform: 'browser',
+          argv: [],
+          cwd: function() { return '/'; },
+          chdir: function() {},
+          umask: function() { return 0; }
+        };
+      }
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

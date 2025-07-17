@@ -11,14 +11,25 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
+    "@react-spring/three": "^10.0.1",
+    "@react-three/drei": "^10.5.1",
+    "@react-three/fiber": "^9.2.0",
+    "@splinetool/react-spline": "^4.1.0",
     "@studio-freight/lenis": "^1.0.42",
     "@tailwindcss/vite": "^4.1.11",
     "framer-motion": "^12.23.6",
     "gsap": "^3.13.0",
     "lucide-react": "^0.525.0",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "tailwindcss": "^4.1.11"
+    "react-intersection-observer": "^9.16.0",
+    "tailwindcss": "^4.1.11",
+    "three": "^0.178.0",
+    "util": "^0.12.5",
+    "vite-plugin-glsl": "^1.3.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
@@ -29,6 +40,6 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
-    "vite": "^7.0.4"
+    "vite": "^6.0.0"
   }
 }
