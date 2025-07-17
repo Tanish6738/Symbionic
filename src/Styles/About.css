@@ -1,0 +1,315 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+body {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll due to animations */
+}
+.story-scene {
+  min-height: 100vh; /* Each section takes at least full viewport height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden; /* Hide overflowing elements during animation */
+  padding: 4rem 1rem; /* Responsive padding */
+}
+.content-wrapper {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+.background-visual {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+.krea-image-parallax {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120%; /* Make it taller for parallax effect */
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+.content-overlay {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+  background: rgba(
+    255,
+    255,
+    255,
+    0.85
+  ); /* Semi-transparent background for text */
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Solution Accordion Styles */
+.solution-accordion-container {
+  min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.accordion-header {
+  margin-bottom: 3rem;
+  max-width: 800px;
+  padding: 2rem 1rem;
+  z-index: 10;
+  position: relative;
+}
+
+.vertical-accordion {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  max-width: none;
+  height: 100vh;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.accordion-panel {
+  flex: 1;
+  position: relative;
+  cursor: pointer;
+  transition: flex 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: hidden;
+  border-right: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.accordion-panel:last-child {
+  border-right: none;
+}
+
+.accordion-panel.active {
+  flex: 4;
+}
+
+.panel-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  color: white;
+  text-align: center;
+}
+
+.panel-text {
+  z-index: 10;
+  position: relative;
+  width: 100%;
+}
+
+.panel-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.accordion-panel.active .panel-title {
+  writing-mode: horizontal-tb;
+  text-orientation: initial;
+  font-size: 2.2rem;
+}
+
+.panel-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.accordion-panel.active .panel-subtitle {
+  writing-mode: horizontal-tb;
+  text-orientation: initial;
+  font-size: 1.3rem;
+}
+
+.panel-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
+  animation-delay: 0.3s;
+  display: none;
+}
+
+.accordion-panel.active .panel-description {
+  display: block;
+}
+
+.panel-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.video-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+  transition: opacity 0.6s ease;
+}
+
+.accordion-panel.active .video-player {
+  opacity: 0.8;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+  transition: opacity 0.6s ease;
+}
+
+.accordion-panel.active .video-overlay {
+  opacity: 0.3;
+}
+
+.accordion-panel:hover .panel-title {
+  color: #f97316;
+  transform: translateY(-10px);
+}
+
+.accordion-panel:hover .video-overlay {
+  opacity: 0.5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .solution-accordion-container {
+    padding: 0;
+  }
+  
+  .accordion-header {
+    padding: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .vertical-accordion {
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+  }
+  
+  .accordion-panel {
+    border-right: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .accordion-panel:last-child {
+    border-bottom: none;
+  }
+  
+  .panel-content {
+    padding: 1rem;
+  }
+  
+  .panel-title {
+    writing-mode: horizontal-tb;
+    text-orientation: initial;
+    font-size: 1.5rem;
+  }
+  
+  .panel-subtitle {
+    writing-mode: horizontal-tb;
+    text-orientation: initial;
+    font-size: 1rem;
+  }
+  
+  .accordion-panel.active .panel-title {
+    font-size: 1.8rem;
+  }
+  
+  .accordion-panel.active .panel-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .panel-description {
+    font-size: 0.9rem;
+  }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .solution-accordion-container {
+    padding: 0;
+  }
+  
+  .accordion-header {
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .vertical-accordion {
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  .panel-content {
+    padding: 0.8rem;
+  }
+  
+  .panel-title {
+    font-size: 1.3rem;
+  }
+  
+  .accordion-header h2 {
+    font-size: 2rem;
+  }
+  
+  .accordion-header p {
+    font-size: 1rem;
+  }
+}

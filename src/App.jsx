@@ -4,6 +4,7 @@ import './App.css';
 import SmoothScroll from './Component/SmoothScroll';
 import LoadingScreen from './Component/LoadingScreen';
 import Hero from './Sections/Hero';
+import About from './Sections/About';
 import Navbar from './Component/Navbar';
 
 function App() {
@@ -22,10 +23,8 @@ function App() {
           <Navbar />
           <SmoothScroll />
           <Hero />
-          <section id="about">About Section</section>
-          <section id="mission">Mission Section</section>
-          <section id="product">Product Section</section>
-          <section id="contact">Contact Section</section>
+          <About />
+          {/* Add other sections/components here as needed */}
         </>
       )}
     </>
