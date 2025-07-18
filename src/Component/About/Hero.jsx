@@ -349,7 +349,7 @@ export default function Hero() {
       </Canvas>
 
       {/* Overlay Content */}
-      <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-center z-10 pointer-events-none px-4">
+      <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-center z-10 px-4">
         <h1
           ref={titleRef}
           className="text-5xl md:text-7xl font-bold opacity-0 drop-shadow-lg"

@@ -444,7 +444,7 @@ export default function Genesis({ scene2Ref }) {
       // className="story-scene bg-gradient-to-tr from-orange-900 via-black to-gray-900 text-white"
       className="story-scene bg-black text-white relative overflow-hidden min-h-screen md:min-h-auto"
     >
-      <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-center z-10 pointer-events-none px-4">
+      <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-center z-10 px-4">
         <p className="text-xl md:text-2xl mb-4 symbionic-reveal text-gray-300">
           It began with a spark — and became
         </p>
@@ -471,9 +471,9 @@ export default function Genesis({ scene2Ref }) {
           {!isMobile && (
             <VerticalSpiral position={[6, 0, 0]} turns={5} color="#222" />
           )}
-          {!isMobile && (
+          
             <ExplodingTorus position={isMobile ? [0, 0, 0] : [-6, 0, 0]} color="#FF6A00" />
-          )}
+          
           <Environment preset="studio" />
         </Suspense>
         <OrbitControls
