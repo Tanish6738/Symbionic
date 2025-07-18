@@ -136,7 +136,8 @@ export default function Promise({ scene5Ref }) {
             ref={textRef}
             className="text-xl mb-4 final-reveal text-gray-200 font-medium z-20 relative"
           >
-            We are Symbionic.
+            We are
+            <span className="text-orange-500 underline "> Symbionic.</span>
           </p>
           <h2
             ref={headingRef}

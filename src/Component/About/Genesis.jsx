@@ -444,11 +444,22 @@ export default function Genesis({ scene2Ref }) {
       // className="story-scene bg-gradient-to-tr from-orange-900 via-black to-gray-900 text-white"
       className="story-scene bg-black text-white relative overflow-hidden min-h-screen md:min-h-auto"
     >
+      {/* Import Parisienne font */}
+      <style>
+        @import
+        url('https://fonts.googleapis.com/css2?family=Parisienne&family=Tangerine:wght@400;700&display=swap');
+      </style>
       <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-center z-10 px-4">
         <p className="text-xl md:text-2xl mb-4 symbionic-reveal text-gray-300">
           It began with a spark — and became
         </p>
-        <h2 className="text-5xl md:text-7xl font-extrabold mb-8 brand-name-animation text-orange-500 drop-shadow-md">
+        <h2
+          style={{
+            fontFamily: `'Tangerine', cursive`,
+            fontWeight: "700",
+          }}
+          className="text-5xl md:text-7xl font-extrabold mb-8 brand-name-animation text-orange-500 drop-shadow-md"
+        >
           Symbionic
         </h2>
         <p className="text-xl md:text-2xl symbionic-reveal text-gray-300">
@@ -471,9 +482,12 @@ export default function Genesis({ scene2Ref }) {
           {!isMobile && (
             <VerticalSpiral position={[6, 0, 0]} turns={5} color="#222" />
           )}
-          
-            <ExplodingTorus position={isMobile ? [0, 0, 0] : [-6, 0, 0]} color="#FF6A00" />
-          
+
+          <ExplodingTorus
+            position={isMobile ? [0, 0, 0] : [-6, 0, 0]}
+            color="#FF6A00"
+          />
+
           <Environment preset="studio" />
         </Suspense>
         <OrbitControls
@@ -485,7 +499,10 @@ export default function Genesis({ scene2Ref }) {
     </section>
   );
 }
-function GalacticPulseCylinder({ position = [0, 0, 0], color = "deepskyblue" }) {
+function GalacticPulseCylinder({
+  position = [0, 0, 0],
+  color = "deepskyblue",
+}) {
   const meshRef = useRef();
 
   const { geometry, originalPositions, normals, colors } = useMemo(() => {
