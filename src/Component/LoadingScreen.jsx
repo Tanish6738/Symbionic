@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { gsap } from "gsap";
 import { ChevronDown } from "lucide-react";
 import SplitText from "./Effect/SplitText";
+import TriangleLoader from "./Styled/TriangelLoader";
 import React, { useRef, useState, useEffect, Suspense, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import {
@@ -754,6 +755,8 @@ function HeartElement({ position = [0, 0, 0], color = "hotpink", scale = 1 }) {
   );
 }
 
+
+
 const LoadingScreen = ({ onComplete }) => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
@@ -868,22 +871,27 @@ const LoadingScreen = ({ onComplete }) => {
       <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center text-center z-10 px-4">
         {/* Main Loading Text */}
         <div className="text-center mb-8">
-          <div className="text-4xl md:text-6xl font-bold text-white mb-4">
-            <span className="text-orange-500">Symbionic</span>
-          </div>
-          {/* <SplitText
-            text="Symbionic"
-            className="text-2xl font-semibold text-center"
-            delay={100}
-            duration={0.6}
-            ease="power3.out"
-            splitType="chars"
-            from={{ opacity: 0, y: 40 }}
-            to={{ opacity: 1, y: 0 }}
-            threshold={0.1}
-            rootMargin="-100px"
-            textAlign="center"
-          /> */}
+          <motion.div
+            className="flex justify-center items-center mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            whileHover={{
+              scale: 1.05,
+            }}
+          >
+            <TriangleLoader />
+          </motion.div>
+
+          <motion.h1
+            className="text-4xl md:text-6xl text-white font-bold mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+          >
+            Symbionic
+          </motion.h1>
+
           <div className="text-xl md:text-2xl text-gray-300 font-light relative">
             <span>{displayText}</span>
             <span
@@ -952,28 +960,6 @@ const LoadingScreen = ({ onComplete }) => {
             style={{ bottom: "20%", right: "15%" }}
           />
         </div>
-      </div>
-
-      <div className="absolute inset-0 w-64 h-64 pointer-events-none rotate-180">
-        {/* 3D Canvas Background 
-        <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
-          <ambientLight intensity={0.4} />
-          <directionalLight position={[10, 10, 5]} intensity={1.2} />
-          <pointLight
-            position={[-10, -10, -5]}
-            intensity={0.5}
-            color="#4299E1"
-          />
-          <Suspense fallback={null}>
-            
-            {!isMobile && <DiamondHeart position={[0, 0, 0]} color="#FBBF24" />}
-          </Suspense>
-          <OrbitControls
-            enableZoom={false}
-            enablePan={false}
-            enableRotate={false}
-          />
-        </Canvas>*/}
       </div>
     </motion.div>
   );

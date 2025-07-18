@@ -8,6 +8,8 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isNavbarHidden, setIsNavbarHidden] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isAutoHidden, setIsAutoHidden] = useState(false);
   const container = useRef(null);
 
   useGSAP(
@@ -25,13 +27,33 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.pageYOffset;
-      setIsScrolled(scrollTop > 50);
+      const currentScrollY = window.pageYOffset;
+      const scrollThreshold = 50;
+      const hideThreshold = 100;
+      
+      // Set scrolled state
+      setIsScrolled(currentScrollY > scrollThreshold);
+      
+      // Auto-hide navbar when scrolling down, show when scrolling up
+      if (currentScrollY > hideThreshold) {
+        if (currentScrollY > lastScrollY && !isNavbarHidden) {
+          // Scrolling down - hide navbar
+          setIsAutoHidden(true);
+        } else if (currentScrollY < lastScrollY && isAutoHidden) {
+          // Scrolling up - show navbar
+          setIsAutoHidden(false);
+        }
+      } else {
+        // Always show navbar when near the top
+        setIsAutoHidden(false);
+      }
+      
+      setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY, isNavbarHidden, isAutoHidden]);
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -43,7 +65,19 @@ const Navbar = () => {
 
   const toggleNavbar = () => {
     setIsNavbarHidden(!isNavbarHidden);
+    // Reset auto-hide when manually toggling
+    if (isNavbarHidden) {
+      setIsAutoHidden(false);
+    }
   };
+
+  const showNavbar = () => {
+    setIsNavbarHidden(false);
+    setIsAutoHidden(false);
+  };
+
+  // Determine if navbar should be hidden (either manually or auto-hidden)
+  const shouldHideNavbar = isNavbarHidden || isAutoHidden;
 
   const navLinks = [
     { id: 'about', label: 'About' },
@@ -54,7 +88,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`navbar ${isScrolled ? 'scrolled' : ''} ${isNavbarHidden ? 'hidden' : ''}`} ref={container}>
+      <nav className={`navbar ${isScrolled ? 'scrolled' : ''} ${shouldHideNavbar ? 'hidden' : ''}`} ref={container}>
         <div className="navbar-container">
           {/* Logo */}
           <div className="navbar-logo">
@@ -84,9 +118,9 @@ const Navbar = () => {
 
           {/* Hide Navbar Button */}
           <button
-            className="cta-button"
+            className="navbar-hide-button"
             onClick={toggleNavbar}
-            style={{ marginLeft: '10px', padding: '8px 12px' }}
+            title="Hide Navigation"
           >
             <ChevronLeft size={16} />
           </button>
@@ -103,8 +137,9 @@ const Navbar = () => {
 
       {/* Show Navbar Toggle Button */}
       <button
-        className={`navbar-toggle-button ${isNavbarHidden ? 'show' : 'hide'}`}
-        onClick={toggleNavbar}
+        className={`navbar-toggle-button ${shouldHideNavbar ? 'show' : 'hide'}`}
+        onClick={showNavbar}
+        title="Show Navigation"
       >
         <ChevronRight size={20} />
       </button>
