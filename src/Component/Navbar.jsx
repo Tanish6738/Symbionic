@@ -75,7 +75,9 @@ const Navbar = () => {
     setIsNavbarHidden(false);
     setIsAutoHidden(false);
   };
-
+  const handleRedirect = () => {
+    window.location.href = '/Login'; // Redirect to the login page
+  };
   // Determine if navbar should be hidden (either manually or auto-hidden)
   const shouldHideNavbar = isNavbarHidden || isAutoHidden;
 
@@ -111,9 +113,11 @@ const Navbar = () => {
             ))}
           </ul>
 
-          {/* CTA Button */}
+          {/* CTA Button Redirected to /Login*/}
           <div className="navbar-cta">
-            <button className="cta-button">Get Started</button>
+            <button className="cta-button" onClick={handleRedirect}>
+              Get Started
+            </button>
           </div>
 
           {/* Hide Navbar Button */}

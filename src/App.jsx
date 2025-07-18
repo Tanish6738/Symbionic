@@ -1,14 +1,23 @@
-
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import SmoothScroll from './Component/SmoothScroll';
 import LoadingScreen from './Component/LoadingScreen';
 import Hero from './Sections/Hero';
 import About from './Sections/About';
 import Navbar from './Component/Navbar';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import AuthPage from './Sections/AuthPage';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const location = useLocation();
+
+  useEffect(() => {
+    // Immediately disable loading screen for the /Login route
+    if (location.pathname === '/Login') {
+      setIsLoading(false);
+    }
+  }, [location.pathname]);
 
   const handleLoadingComplete = () => {
     setIsLoading(false);
@@ -16,16 +25,13 @@ function App() {
 
   return (
     <>
-      {isLoading ? (
+      {isLoading && location.pathname !== '/Login' ? (
         <LoadingScreen onComplete={handleLoadingComplete} />
       ) : (
-        <>
-          <Navbar />
-          <SmoothScroll />
-          <Hero />
-          <About />
-          {/* Add other sections/components here as needed */}
-        </>
+        <Routes>
+          <Route path="/" element={<><Navbar /><SmoothScroll /><Hero /><About /></>} />
+          <Route path="/Login" element={<AuthPage />} />
+        </Routes>
       )}
     </>
   );
