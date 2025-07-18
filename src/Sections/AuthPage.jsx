@@ -1,11 +1,16 @@
 // AuthPage.jsx
 import React, { useState } from "react";
 import "../Styles/AuthPage.css";
+import { Link } from "react-router-dom";
 const AuthPage = () => {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
 
   return (
     <div className={`container ${isSignUpMode ? "sign-up-mode" : ""}`}>
+      {/* Back to Home Button Link */}
+      <Link to="/" className="absolute top-4 left-4 text-white z-30 border border-2 p-2 rounded-lg hover:text-orange-400 hover:bg-white">Back to Home</Link>
+
+      {/* Forms Container */}
       <div className="forms-container">
         <div className="signin-signup">
           {/* Sign In Form */}
