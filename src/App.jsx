@@ -8,6 +8,7 @@ import Navbar from "./Component/Navbar";
 import { Route, Routes, useLocation } from "react-router-dom";
 import AuthPage from "./Sections/AuthPage";
 import Product from "./Sections/Product";
+import Contact from "./Sections/Contact";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -39,7 +40,8 @@ function App() {
                 <SmoothScroll />
                 <Hero />
                 <About />
-                <Product/>                
+                <Product/>
+                <Contact/>                
               </>
             }
           />

@@ -174,7 +174,7 @@ export default function About() {
       <Solution scene3Ref={scene3Ref} />
       <Mission scene4Ref={scene4Ref} />
       <Promise scene5Ref={scene5Ref} />
-      <Footer />
+      {/* <Footer /> */}
       {/* <Page/> */}
 
       {/* reactiveOrd
