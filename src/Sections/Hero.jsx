@@ -31,7 +31,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative min-h-screen bg-black overflow-hidden">
+    <section ref={heroRef} className="relative min-h-screen  overflow-hidden">
       {/* Background Video/Animation */}
       <HeroBackground />
 

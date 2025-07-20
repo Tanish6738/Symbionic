@@ -43,9 +43,9 @@ function HeroBackground() {
         muted
         playsInline // Important for mobile autoplay
         className="w-full h-full object-cover opacity-20"
-        src="/Videos/Bg.mp4" // Remove the #t fragment here
+        src="/Videos/n2.mp4" // Remove the #t fragment here
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-black/20 to-transparent" />
+      <div className="absolute inset-0 " />
     </div>
   );
 }
