@@ -9,6 +9,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import AuthPage from "./Sections/AuthPage";
 import Product from "./Sections/Product";
 import Contact from "./Sections/Contact";
+import Footer from "./Sections/Footer";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -41,7 +42,8 @@ function App() {
                 <Hero />
                 <About />
                 <Product/>
-                <Contact/>                
+                <Contact/>    
+                <Footer/>
               </>
             }
           />

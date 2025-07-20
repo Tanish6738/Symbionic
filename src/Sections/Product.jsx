@@ -51,7 +51,6 @@ const Product = () => {
           scrub: 1,
           pin: wrapper,
           anticipatePin: 1,
-          markers: true, // remove in prod
           invalidateOnRefresh: true,
         },
       });
