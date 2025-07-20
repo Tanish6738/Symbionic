@@ -1,4 +1,13 @@
-      
+import React, { useRef, useLayoutEffect, Suspense, useMemo, useState, useEffect } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls, Environment, Float } from '@react-three/drei';
+import { useSpring, a } from '@react-spring/three';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import * as THREE from 'three';
+
+gsap.registerPlugin(ScrollTrigger);
+ 
 function AnimatedSphere() {
   const mesh = useRef();
   const { scale } = useSpring({
@@ -735,7 +744,7 @@ function HeartElement({ position = [0, 0, 0], color = "hotpink", scale = 1 }) {
 }
 
 export {
-  AnimatedSphere,
+    AnimatedSphere,
     AnimatedGear,
     VerticalSpiral,
     AnimatedSpring,

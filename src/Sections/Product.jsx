@@ -8,6 +8,8 @@ import Section3 from "../Component/Product/Section3";
 import Section4 from "../Component/Product/Section4";
 import Section5 from "../Component/Product/Section5";
 import Hero from "../Component/Product/Hero";
+import Section6 from "../Component/Product/Section6";
+import Section7 from "../Component/Product/Section7";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -92,7 +94,7 @@ const Product = () => {
             <Section2/>
           </div>
 
-          {/* Section 2 - Product Feature 1 */}
+          {/* Section 2 - Product Limb */}
           <div
             ref={(el) => (sectionsRef.current[1] = el)}
             className="h-screen w-screen flex items-center justify-center text-white text-4xl font-bold bg-gradient-to-br from-green-600 to-teal-700"
@@ -101,7 +103,7 @@ const Product = () => {
             <Section3/>
           </div>
 
-          {/* Section 3 - Product Feature 2 */}
+          {/* Section 3 - Product GYM  */}
           <div
             ref={(el) => (sectionsRef.current[2] = el)}
             className="h-screen w-screen flex items-center justify-center text-white text-4xl font-bold bg-gradient-to-br from-orange-600 to-red-700"
@@ -110,7 +112,7 @@ const Product = () => {
             <Section4/>
           </div>
 
-          {/* Section 4 - Product Feature 3 */}
+          {/* Section 4 - Product RIDE */}
           <div
             ref={(el) => (sectionsRef.current[3] = el)}
             className="h-screen w-screen flex items-center justify-center text-white text-4xl font-bold bg-gradient-to-br from-indigo-600 to-pink-700"
@@ -118,6 +120,23 @@ const Product = () => {
           >
             <Section5/>
           </div>
+          {/* Section 5 - Product Feature 4 */}
+          <div
+            ref={(el) => (sectionsRef.current[4] = el)}
+            className="h-screen w-screen flex items-center justify-center text-white text-4xl font-bold bg-gradient-to-br from-indigo-600 to-pink-700"
+            style={{ flexShrink: 0 }}
+          >
+            <Section6/>
+          </div>
+          {/* Section 6 - Product Feature 5 */}
+          <div
+            ref={(el) => (sectionsRef.current[5] = el)}
+            className="h-screen w-screen flex items-center justify-center text-white text-4xl font-bold bg-gradient-to-br from-indigo-600 to-pink-700"
+            style={{ flexShrink: 0 }}
+          >
+            <Section7/>
+          </div>
+
         </div>
       </div>
 

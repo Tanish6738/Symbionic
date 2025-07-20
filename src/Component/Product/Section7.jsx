@@ -4,7 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Section5() {
+export default function Section7() {
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -36,37 +36,37 @@ export default function Section5() {
         {/* Text Content */}
         <div className="flex-1 text-center lg:text-left">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4 md:mb-5 leading-tight">
-            <span className="text-cyan-400">Command the Road</span> with Confidence.
+            <span className="text-pink-400">Precision</span> for the Finer Details.
           </h2>
 
           <ul className="space-y-2 sm:space-y-3 text-white/95 text-sm sm:text-base lg:text-base xl:text-lg leading-relaxed mb-4 sm:mb-6">
             <li className="flex items-center justify-center lg:justify-start gap-2">
-              <span><strong>Secure Grip:</strong> Confident hold on handlebars.</span>
+              <span><strong>Delicate Motor Control:</strong> Perfect for makeup and grooming.</span>
             </li>
             <li className="flex items-center justify-center lg:justify-start gap-2">
-              <span><strong>Vibration Control:</strong> Less fatigue, smoother rides.</span>
+              <span><strong>Smart Pressure Sensors:</strong> Gentle when needed.</span>
             </li>
             <li className="flex items-center justify-center lg:justify-start gap-2">
-              <span><strong>Weatherproof:</strong> Rides through rain, dust, or shine.</span>
+              <span><strong>Fluid Motion:</strong> For accurate strokes and touches.</span>
             </li>
             <li className="flex items-center justify-center lg:justify-start gap-2">
-              <span><strong>Aerodynamic Shape:</strong> Sleek and responsive.</span>
+              <span><strong>Easy to Sanitize:</strong> Safe and hygienic.</span>
             </li>
           </ul>
 
           <div className="flex justify-center lg:justify-start">
-            <button className="bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 text-white font-bold py-3 px-6 sm:py-4 sm:px-8 text-base sm:text-lg rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-out focus:outline-none focus:ring-4 focus:ring-cyan-500/50">
-              Add Riding Assist
+            <button className="bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white font-bold py-3 px-6 sm:py-4 sm:px-8 text-base sm:text-lg rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-out focus:outline-none focus:ring-4 focus:ring-pink-500/50">
+              Add Cosmetic Assist
             </button>
           </div>
         </div>
 
         {/* Image Content */}
         <div className="flex-1 w-full max-w-xs sm:max-w-sm md:max-w-sm lg:max-w-md order-first lg:order-last">
-          <div className="bg-gradient-to-tr from-cyan-500/30 to-white/10 p-3 sm:p-4 md:p-5 lg:p-4 rounded-2xl sm:rounded-3xl shadow-2xl border border-cyan-500/20 hover:shadow-cyan-500/25 transition-all duration-300">
+          <div className="bg-gradient-to-tr from-pink-500/30 to-white/10 p-3 sm:p-4 md:p-5 lg:p-4 rounded-2xl sm:rounded-3xl shadow-2xl border border-pink-500/20 hover:shadow-pink-500/25 transition-all duration-300">
             <img
-              src="/Images/Ride.png"
-              alt="Krea Riding Assist - Grip and Ride Enhancer"
+              src="/Images/Cosmetic.png"
+              alt="Krea Cosmetic Assist - Fine Detailing Tool"
               className="w-full h-auto object-contain rounded-xl sm:rounded-2xl drop-shadow-lg"
             />
           </div>
