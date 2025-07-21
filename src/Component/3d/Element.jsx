@@ -1,13 +1,20 @@
-import React, { useRef, useLayoutEffect, Suspense, useMemo, useState, useEffect } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Environment, Float } from '@react-three/drei';
-import { useSpring, a } from '@react-spring/three';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import * as THREE from 'three';
+import React, {
+  useRef,
+  useLayoutEffect,
+  Suspense,
+  useMemo,
+  useState,
+  useEffect,
+} from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { OrbitControls, Environment, Float } from "@react-three/drei";
+import { useSpring, a } from "@react-spring/three";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import * as THREE from "three";
 
 gsap.registerPlugin(ScrollTrigger);
- 
+
 function AnimatedSphere() {
   const mesh = useRef();
   const { scale } = useSpring({
@@ -610,7 +617,10 @@ function DiamondHeart({ position = [0, 0, 0], color = "hotpink" }) {
       bevelThickness: 0.3,
     };
 
-    const geo = new THREE.ExtrudeGeometry(shape, extrudeSettings).toNonIndexed();
+    const geo = new THREE.ExtrudeGeometry(
+      shape,
+      extrudeSettings
+    ).toNonIndexed();
     geo.center();
 
     const posAttr = geo.getAttribute("position");
@@ -664,8 +674,7 @@ function DiamondHeart({ position = [0, 0, 0], color = "hotpink" }) {
     posAttr.needsUpdate = true;
     colAttr.needsUpdate = true;
 
-
-      meshRef.current.position.y = position[1] + Math.sin(t * 0.0015) * 0.2;
+    meshRef.current.position.y = position[1] + Math.sin(t * 0.0015) * 0.2;
 
     // meshRef.current.rotation.x = t / 4000;
     // meshRef.current.rotation.y = t / 3000;
@@ -708,7 +717,10 @@ function HeartElement({ position = [0, 0, 0], color = "hotpink", scale = 1 }) {
       bevelThickness: 0.2,
     };
 
-    const geo = new THREE.ExtrudeGeometry(shape, extrudeSettings).toNonIndexed();
+    const geo = new THREE.ExtrudeGeometry(
+      shape,
+      extrudeSettings
+    ).toNonIndexed();
     geo.center();
     geo.scale(scale, scale, scale);
 
@@ -743,18 +755,461 @@ function HeartElement({ position = [0, 0, 0], color = "hotpink", scale = 1 }) {
   );
 }
 
+function ChainElement({
+  position = [0, 0, 0],
+  linkCount = 10,
+  linkRadius = 0.2,
+  linkLength = 1.2,
+  spacing = 0.95,
+  color = "#bbbbbb",
+}) {
+  const groupRef = useRef();
+
+  // Animate slight sway or twist
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime();
+    groupRef.current.rotation.z = Math.sin(t * 0.5) * 0.05;
+  });
+
+  return (
+    <group ref={groupRef} position={position}>
+      {Array.from({ length: linkCount }).map((_, i) => {
+        const isEven = i % 2 === 0;
+        const y = -i * spacing;
+
+        return (
+          <mesh
+            key={i}
+            position={[0, y, 0]}
+            rotation={[0, 0, isEven ? 0 : Math.PI / 2]}
+          >
+            <cylinderGeometry
+              args={[linkRadius, linkRadius, linkLength, 32, 1, true]}
+            />
+            <meshStandardMaterial
+              color={color}
+              metalness={0.8}
+              roughness={0.2}
+              emissive={new THREE.Color(color).multiplyScalar(0.1)}
+              side={THREE.DoubleSide}
+            />
+          </mesh>
+        );
+      })}
+    </group>
+  );
+}
+
+function SolidStar({
+  position = [0, 0, 0],
+  color = "#ffaa00",
+  size = 1,
+  thickness = 0.3,
+  points = 5,
+}) {
+  const shape = useMemo(() => {
+    const starShape = new THREE.Shape();
+    const step = Math.PI / points;
+    const outerRadius = size;
+    const innerRadius = size / 2.5;
+
+    for (let i = 0; i < 2 * points; i++) {
+      const r = i % 2 === 0 ? outerRadius : innerRadius;
+      const angle = i * step;
+      const x = Math.cos(angle) * r;
+      const y = Math.sin(angle) * r;
+      if (i === 0) {
+        starShape.moveTo(x, y);
+      } else {
+        starShape.lineTo(x, y);
+      }
+    }
+    starShape.closePath();
+    return starShape;
+  }, [size, points]);
+
+  return (
+    <group position={position}>
+      <mesh>
+        <extrudeGeometry
+          args={[
+            shape,
+            {
+              depth: thickness,
+              bevelEnabled: true,
+              bevelThickness: 0.05,
+              bevelSize: 0.03,
+              bevelSegments: 2,
+              steps: 1,
+            },
+          ]}
+        />
+        <meshStandardMaterial color={color} roughness={0.4} metalness={0.5} />
+      </mesh>
+    </group>
+  );
+}
+
+function DoubleChainTorus() {
+  return (
+    <>
+      <ExplodingTorus position={[-1.5, 0, 0]} color="royalblue" />
+      <ExplodingTorus
+        position={[1.5, 0, 0]}
+        rotation={[Math.PI / 2, 0, 0]}
+        color="orange"
+      />
+    </>
+  );
+}
+
+// Builds the chain by stacking rotated links
+function ChainAssembly({ links = 12, spacing = 1.4 }) {
+  const chain = [];
+
+  for (let i = 0; i < links; i++) {
+    const y = i * spacing;
+    const rot = i % 2 === 0 ? [Math.PI / 2, 0, 0] : [0, 0, 0];
+    const color = i % 2 === 0 ? "silver" : "#999";
+
+    chain.push(
+      <ChainLink key={i} position={[0, y, 0]} rotation={rot} color={color} />
+    );
+  }
+
+  return <group position={[0, -links * spacing * 0.5, 0]}>{chain}</group>;
+}
+
+function ChainLink({
+  position = [0, 0, 0],
+  rotation = [0, 0, 0],
+  color = "silver",
+}) {
+  const meshRef = useRef();
+
+  const geometry = useMemo(() => {
+    return new THREE.TorusGeometry(1, 0.2, 16, 100);
+  }, []);
+
+  useFrame(() => {
+    meshRef.current.rotation.z += 0.001;
+  });
+
+  return (
+    <mesh
+      ref={meshRef}
+      position={position}
+      rotation={rotation}
+      geometry={geometry}
+    >
+      <meshStandardMaterial color={color} metalness={0.8} roughness={0.3} />
+    </mesh>
+  );
+}
+
+function ChainVisual({ position = [0, 0, 0], color = "#FBBF24", links = 8 }) {
+  const spacing = 1.4;
+  const chainLinks = [];
+
+  for (let i = 0; i < links; i++) {
+    const y = i * spacing;
+    const rot = i % 2 === 0 ? [Math.PI / 2, 0, 0] : [0, 0, 0];
+
+    chainLinks.push(
+      <ChainLink key={i} position={[0, y, 0]} rotation={rot} color={color} />
+    );
+  }
+
+  return <group position={position}>{chainLinks}</group>;
+}
+
+function InclinedBrick({
+  position = [0, 0, 0],
+  rotation = [0.3, 0.2, 0], // inclination in radians
+  color = "#A52A2A", // brick red
+  size = [2, 1, 1], // width, height, depth
+}) {
+  const meshRef = useRef();
+
+  // Optional: add a subtle rotation animation
+  useFrame(() => {
+    meshRef.current.rotation.y += 0.0008;
+  });
+
+  return (
+    <mesh ref={meshRef} position={position} rotation={rotation}>
+      <boxGeometry args={size} />
+      <meshStandardMaterial color={color} roughness={0.6} metalness={0.1} />
+    </mesh>
+  );
+}
+
+function DiamondSymbol({
+  position = [0, 0, 0],
+  rotation = [-0.3, 0.3, 0], // slight inclination
+  scale = [1, 1, 0.3],
+  color = "#DC2626", // deep red
+}) {
+  const meshRef = useRef();
+
+  const geometry = useMemo(() => {
+    // Create a custom diamond shape (rhombus)
+    const shape = new THREE.Shape();
+    shape.moveTo(0, 1);
+    shape.lineTo(1, 0);
+    shape.lineTo(0, -1);
+    shape.lineTo(-1, 0);
+    shape.lineTo(0, 1); // close path
+
+    // Extrude it for 3D volume
+    const extrudeSettings = {
+      depth: 0.3,
+      bevelEnabled: true,
+      bevelSegments: 2,
+      steps: 1,
+      bevelSize: 0.1,
+      bevelThickness: 0.1,
+    };
+
+    return new THREE.ExtrudeGeometry(shape, extrudeSettings);
+  }, []);
+
+  useFrame(() => {
+    // Optional animation (pulse or rotate)
+    // meshRef.current.rotation.y += 0.001;
+  });
+
+  return (
+    <mesh
+      ref={meshRef}
+      geometry={geometry}
+      position={position}
+      rotation={rotation}
+      scale={scale}
+    >
+      <meshStandardMaterial color={color} metalness={0.2} roughness={0.4} />
+    </mesh>
+  );
+}
+
+function GemDiamond({
+  position = [0, 0, 0],
+  baseRotation = [Math.PI / 4, Math.PI / 4, 0], // 45° Y and inclined X
+  scale = [1.2, 2.2, 1.2], // X, Y, Z
+  color = "#6B5BFA",
+}) {
+  const meshRef = useRef();
+
+  const geometry = useMemo(() => {
+    const gem = new THREE.BufferGeometry();
+
+    const vertices = new Float32Array([
+      0,
+      1,
+      0, // top
+      -0.7,
+      0,
+      0.7,
+      0.7,
+      0,
+      0.7,
+      0.7,
+      0,
+      -0.7,
+      -0.7,
+      0,
+      -0.7,
+      0,
+      -1,
+      0, // bottom
+    ]);
+
+    const indices = [
+      0, 1, 2, 0, 2, 3, 0, 3, 4, 0, 4, 1,
+
+      5, 2, 1, 5, 3, 2, 5, 4, 3, 5, 1, 4,
+    ];
+
+    gem.setAttribute("position", new THREE.BufferAttribute(vertices, 3));
+    gem.setIndex(indices);
+    gem.computeVertexNormals();
+
+    return gem;
+  }, []);
+
+  useFrame(() => {
+    if (meshRef.current) {
+      meshRef.current.rotation.y += 0.002; // slow spinning
+    }
+  });
+
+  return (
+    <mesh
+      ref={meshRef}
+      geometry={geometry}
+      position={position}
+      rotation={baseRotation}
+      scale={scale}
+    >
+      <meshPhysicalMaterial
+        color={color}
+        metalness={0}
+        roughness={0}
+        transmission={1} // full transmission (glass)
+        transparent={true}
+        thickness={1.5} // increase thickness for more depth/refraction
+        ior={2.42} // glass-like index of refraction (diamond is 2.42)
+        reflectivity={1}
+        clearcoat={1}
+        clearcoatRoughness={0}
+        attenuationColor={color}
+        attenuationDistance={0.5}
+        envMapIntensity={2}
+      />
+    </mesh>
+  );
+}
+
+function GemDiamondExploding({
+  position = [0, 0, 0],
+  baseRotation = [Math.PI / 4, Math.PI / 4, 0],
+  scale = [1.2, 2.2, 1.2],
+  color = "#6B5BFA"
+}) {
+  const meshRef = useRef();
+
+  const { geometry, originalPositions, normals, colors } = useMemo(() => {
+    // Define geometry
+    const gem = new THREE.BufferGeometry();
+
+    const vertices = new Float32Array([
+      0, 1, 0,          // top
+      -0.7, 0, 0.7,
+      0.7, 0, 0.7,
+      0.7, 0, -0.7,
+      -0.7, 0, -0.7,
+      0, -1, 0          // bottom
+    ]);
+
+    const indices = [
+      0, 1, 2,
+      0, 2, 3,
+      0, 3, 4,
+      0, 4, 1,
+
+      5, 2, 1,
+      5, 3, 2,
+      5, 4, 3,
+      5, 1, 4
+    ];
+
+    gem.setAttribute("position", new THREE.BufferAttribute(vertices, 3));
+    gem.setIndex(indices);
+    gem.computeVertexNormals();
+    const nonIndexed = gem.toNonIndexed();
+
+    const posAttr = nonIndexed.getAttribute("position");
+    const normAttr = nonIndexed.getAttribute("normal");
+
+    const ori = posAttr.clone();
+    const normals = normAttr.clone();
+
+    const colors = new Float32Array(posAttr.count * 4); // RGBA
+
+    for (let i = 0; i < posAttr.count; i++) {
+      colors.set([0.3, 1.0, 0.5, 1.0], i * 4); // initial color
+    }
+
+    nonIndexed.setAttribute("color", new THREE.BufferAttribute(colors, 4));
+
+    return {
+      geometry: nonIndexed,
+      originalPositions: ori.array,
+      normals: normals.array,
+      colors: colors
+    };
+  }, []);
+
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime() * 1000;
+
+    const posAttr = meshRef.current.geometry.getAttribute("position");
+    const colAttr = meshRef.current.geometry.getAttribute("color");
+
+    const posArray = posAttr.array;
+    const colArray = colAttr.array;
+
+    for (let i = 0; i < posArray.length / 3; i++) {
+      const triIndex = Math.floor(i / 3);
+      const offset = i * 3;
+      const normalOffset = offset;
+      const oriOffset = offset;
+
+      const dist = (Math.sin(t / 200 + triIndex * triIndex) * 0.5 + 0.5) / 8;
+
+      const nx = normals[normalOffset];
+      const ny = normals[normalOffset + 1];
+      const nz = normals[normalOffset + 2];
+
+      const ox = originalPositions[oriOffset];
+      const oy = originalPositions[oriOffset + 1];
+      const oz = originalPositions[oriOffset + 2];
+
+      posArray[offset] = ox + nx * dist;
+      posArray[offset + 1] = oy + ny * dist;
+      posArray[offset + 2] = oz + nz * dist;
+
+      colArray[i * 4 + 3] = 1 - 4 * dist; // Fade out
+    }
+
+    posAttr.needsUpdate = true;
+    colAttr.needsUpdate = true;
+
+    meshRef.current.rotation.y += 0.002; // slow rotation
+  });
+
+  return (
+    <mesh
+      ref={meshRef}
+      geometry={geometry}
+      position={position}
+      rotation={baseRotation}
+      scale={scale}
+    >
+      <meshPhongMaterial
+        vertexColors={true}
+        flatShading={true}
+        side={THREE.DoubleSide}
+        transparent
+        shininess={510}
+        color={color}
+      />
+    </mesh>
+  );
+}
+
 export {
-    AnimatedSphere,
-    AnimatedGear,
-    VerticalSpiral,
-    AnimatedSpring,
-    AnimatedChain,
-    AnimatedCornerSphere,
-    CosmicOrb,
-    ExplodingTorus,
-    NebulaBloomSphere,
-    GalacticPulseCylinder,
-    DiamondEffectMesh,
-    DiamondHeart,
-    HeartElement,
+  AnimatedSphere,
+  AnimatedGear,
+  VerticalSpiral,
+  InclinedBrick,
+  AnimatedSpring,
+  AnimatedChain,
+  AnimatedCornerSphere,
+  CosmicOrb,
+  ExplodingTorus,
+  NebulaBloomSphere,
+  GalacticPulseCylinder,
+  DiamondEffectMesh,
+  DiamondHeart,
+  HeartElement,
+  ChainElement,
+  SolidStar,
+  DoubleChainTorus,
+  ChainVisual,
+  ChainAssembly,
+  ChainLink,
+  DiamondSymbol,
+  GemDiamond,
+  GemDiamondExploding
 };

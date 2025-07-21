@@ -5,6 +5,7 @@ import HeroBackground from "../Component/HeroBackground";
 
 const Hero = () => {
   const heroRef = useRef(null);
+  const imgRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -27,6 +28,19 @@ const Hero = () => {
       });
     }, heroRef);
 
+    // Initial animation for the background image
+    gsap.fromTo(
+      imgRef.current,
+      { scale: 1.2, opacity: 0 },
+      {
+        scale: 1,
+        opacity: 1,
+        duration: 2,
+        ease: "power2.out",
+      }
+    );
+
+    // Cleanup function to revert GSAP context
     return () => ctx.revert();
   }, []);
 
@@ -39,7 +53,7 @@ const Hero = () => {
       {/* <HeroBackground /> */}
 
       {/* BackgroundImage with different view in mobile and desktop behind */}
-      <div className="absolute inset-0 z-10 w-full h-full">
+      <div className="absolute inset-0 z-10 w-full h-full" ref={imgRef}>
         <img
           src="./Images/Bg-img.png"
           alt="Background"
