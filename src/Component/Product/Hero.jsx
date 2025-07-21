@@ -49,7 +49,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="w-full h-screen bg-black text-white relative flex items-center justify-center overflow-hidden">
+    <section className="w-full min-h-screen bg-black text-white relative flex flex-col items-center justify-center overflow-auto">
       <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 via-white/5 to-black opacity-20 pointer-events-none" />
       <div className="absolute inset-0 flex items-center justify-center">
         <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>

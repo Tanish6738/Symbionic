@@ -10,6 +10,7 @@ import AuthPage from "./Sections/AuthPage";
 import Product from "./Sections/Product";
 import Contact from "./Sections/Contact";
 import Footer from "./Sections/Footer";
+import AllProducts from "./Sections/AllProducts";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -48,6 +49,7 @@ function App() {
             }
           />
           <Route path="/Login" element={<AuthPage />} />
+          <Route path="/products" element={<AllProducts />} />
         </Routes>
       )}
     </>
