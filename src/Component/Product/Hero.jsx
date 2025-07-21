@@ -70,12 +70,13 @@ export default function Hero() {
                 />
               </>
             )}
-            {/* Yellow */}
-            <ExplodingTorus
-              
-              position={isMobile ? [0, 0, 0] : [6, 0, 0]}
-              color="red"
-            />
+            {/* only mobile */}
+            {isMobile && (
+              <ExplodingTorus
+                position={isMobile ? [0, 0, 0] : [6, 0, 0]}
+                color="red"
+              />
+            )}
             <Environment preset="studio" />
           </React.Suspense>
           <OrbitControls
