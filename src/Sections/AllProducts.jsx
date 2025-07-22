@@ -1,6 +1,5 @@
 import React from 'react';
 import CustomPage from '../Component/CustomPage';
-import Navbar from "../Component/Navbar"
 const AllProducts = () => {
   // Product showcase data
   const productFeatures = [
@@ -70,7 +69,6 @@ const AllProducts = () => {
 
   return (
     <div className="min-h-screen">
-      <Navbar/>
       <CustomPage
         title="Symbionic Product Showcase"
         heading={{

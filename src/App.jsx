@@ -43,6 +43,7 @@ function App() {
                 <Hero />
                 <About />
                 <Product/>
+                <AllProducts/>
                 <Contact/>    
                 <Footer/>
               </>
