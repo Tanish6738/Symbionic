@@ -12,6 +12,7 @@ import Footer from "../Component/About/Footer";
 import Page from "../Component/3d/Page";
 import Spline from "@splinetool/react-spline";
 import ImageTransitionComponent from "../Component/3d/ImageTransitionComponent";
+import SolutionHero from "../Component/About/SolutionHero";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -171,6 +172,7 @@ export default function About() {
       <Hero />
       <Spark scene1Ref={scene1Ref} />
       <Genesis scene2Ref={scene2Ref} />
+      <SolutionHero />
       <Solution scene3Ref={scene3Ref} />
       <Mission scene4Ref={scene4Ref} />
       <Promise scene5Ref={scene5Ref} />

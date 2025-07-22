@@ -350,19 +350,7 @@ const CustomPage = ({
               {description}
             </p>
             
-            <div className="rounded-lg bg-gray-800/50 backdrop-blur-sm p-6 border border-gray-700 shadow-xl">
-              <h3 className="mb-4 text-xl font-semibold text-white">
-                Platform Highlights
-              </h3>
-              <ul className="space-y-3 text-base text-gray-300">
-                {highlights.map((highlight, index) => (
-                  <li key={index} className="flex items-center">
-                    <span className="mr-3 text-orange-500 text-lg">•</span>
-                    {highlight}
-                  </li>
-                ))}
-              </ul>
-            </div>
+
           </motion.div>
           
           <motion.div 
