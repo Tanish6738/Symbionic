@@ -7,7 +7,7 @@ input {
 .container {
   position: relative;
   width: 100%;
-  background-color: #fff;
+  background-color: #000;
   min-height: 100vh;
   overflow: hidden;
 }
@@ -42,6 +42,8 @@ form {
   overflow: hidden;
   grid-column: 1 / 2;
   grid-row: 1 / 2;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 20px;
 }
 
 form.sign-up-form {
@@ -55,14 +57,14 @@ form.sign-in-form {
 
 .title {
   font-size: 2.2rem;
-  color: #444;
+  color: #fff;
   margin-bottom: 10px;
 }
 
 .input-field {
   max-width: 380px;
   width: 100%;
-  background-color: #f0f0f0;
+  background-color: #1a1a1a;
   margin: 10px 0;
   height: 55px;
   border-radius: 55px;
@@ -70,12 +72,13 @@ form.sign-in-form {
   grid-template-columns: 15% 85%;
   padding: 0 0.4rem;
   position: relative;
+  border: 1px solid #333;
 }
 
 .input-field i {
   text-align: center;
   line-height: 55px;
-  color: #acacac;
+  color: #F97316;
   transition: 0.5s;
   font-size: 1.1rem;
 }
@@ -87,17 +90,27 @@ form.sign-in-form {
   line-height: 1;
   font-weight: 600;
   font-size: 1.1rem;
-  color: #333;
+  color: #fff;
 }
 
 .input-field input::placeholder {
-  color: #aaa;
+  color: #888;
   font-weight: 500;
+}
+
+.input-field:focus-within {
+  border-color: #F97316;
+  box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.2);
+}
+
+.input-field:focus-within i {
+  color: #F97316;
 }
 
 .social-text {
   padding: 0.7rem 0;
   font-size: 1rem;
+  color: #fff;
 }
 
 .social-media {
@@ -112,9 +125,9 @@ form.sign-in-form {
   justify-content: center;
   align-items: center;
   margin: 0 0.45rem;
-  color: #333;
+  color: #fff;
   border-radius: 50%;
-  border: 1px solid #333;
+  border: 1px solid #fff;
   text-decoration: none;
   font-size: 1.1rem;
   transition: 0.3s;
@@ -141,7 +154,7 @@ form.sign-in-form {
 }
 
 .btn:hover {
-  background-color: #f7802b;
+  background-color: #e5660a;
 }
 .panels-container {
   position: absolute;

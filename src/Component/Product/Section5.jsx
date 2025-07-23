@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import TiltedCard from "../Effect/TitledCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -63,13 +64,18 @@ export default function Section5() {
 
         {/* Image Content */}
         <div className="flex-1 w-full max-w-xs sm:max-w-sm md:max-w-sm lg:max-w-md order-first lg:order-last">
-          <div className="bg-gradient-to-tr from-cyan-500/30 to-white/10 p-3 sm:p-4 md:p-5 lg:p-4 rounded-2xl sm:rounded-3xl shadow-2xl border border-cyan-500/20 hover:shadow-cyan-500/25 transition-all duration-300">
-            <img
-              src="/Images/Ride.png"
-              alt="Krea Riding Assist - Grip and Ride Enhancer"
-              className="w-full h-auto object-contain rounded-xl sm:rounded-2xl drop-shadow-lg"
-            />
-          </div>
+          <TiltedCard
+            imageSrc="/Images/Ride.png"
+            altText="Krea Riding Assist - Grip and Ride Enhancer"
+            captionText="Krea Riding Assist"
+            containerHeight="400px"
+            imageHeight="350px"
+            imageWidth="350px"
+            scaleOnHover={1.05}
+            rotateAmplitude={12}
+            showMobileWarning={false}
+            showTooltip={true}
+          />
         </div>
 
       </div>

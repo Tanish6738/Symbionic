@@ -97,7 +97,7 @@ export default function Hero() {
         <div ref={ctaRef}>
           <a
             href="#features"
-            className="inline-block px-8 py-4 bg-orange-500 hover:bg-orange-600 text-black text-lg font-semibold rounded-2xl transition duration-300 shadow-xl"
+            className="inline-block px-8 py-4 text-white bg-orange-500 hover:bg-orange-600 text-lg font-semibold rounded-2xl transition duration-300 shadow-xl"
           >
             Discover Krea Adaptive
           </a>
