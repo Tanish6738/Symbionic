@@ -168,7 +168,9 @@ const Contact = () => {
   };
 
   return (
-    <div style={contactStyles.container}>
+    <div
+    id="contact"
+    style={contactStyles.container}>
       <div style={contactStyles.wrapper}>
         <h1 className="text-4xl font-bold mb-8 text-center flex items-center justify-center gap-2">
           <span

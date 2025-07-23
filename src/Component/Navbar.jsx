@@ -75,7 +75,6 @@ const Navbar = () => {
 
   const navLinks = [
     { id: 'about', label: 'About' },
-    { id: 'mission', label: 'Mission' },
     { id: 'product', label: 'Product' },
     { id: 'contact', label: 'Contact' },
   ];

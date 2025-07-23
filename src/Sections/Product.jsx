@@ -66,7 +66,9 @@ const Product = () => {
   }, []);
 
   return (
-    <div className="relative">
+    <div 
+    id="product"
+    className="relative">
       {/* Horizontal scroll container */}
       <div 
         ref={wrapperRef}

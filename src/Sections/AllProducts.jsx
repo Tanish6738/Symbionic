@@ -1,61 +1,73 @@
 import React from "react";
 import CustomPage from "../Component/CustomPage";
 const AllProducts = () => {
-  // Product showcase data
-  const productFeatures = [
+  // Client testimonials data
+  const testimonialFeatures = [
     {
       id: 1,
-      img: "/Images/GYM.png",
-      title: "Fitness & Training",
+      img: "/Images/1.avif",
+      title: "Sarah Johnson",
       description:
-        "Revolutionary fitness solutions powered by AI technology. Track your progress, optimize workouts, and achieve your fitness goals with personalized training programs and real-time performance analytics.",
+        "Symbionic's fitness solution transformed my workout routine completely. The AI-powered analytics helped me achieve my goals 3x faster than traditional methods. The personalized training programs are simply outstanding!",
+      role: "Fitness Enthusiast",
+      rating: 5,
     },
     {
       id: 2,
-      img: "/Images/Swim.png",
-      title: "Aquatic Sports",
+      img: "/Images/2.avif",
+      title: "Michael Chen",
       description:
-        "Advanced swimming and water sports technology. Monitor technique, track performance metrics, and improve your aquatic skills with our cutting-edge underwater sensors and motion analysis.",
+        "As a professional swimmer, I needed precise performance tracking. Symbionic's aquatic sports technology provided insights I never knew existed. My technique improved dramatically within weeks.",
+      role: "Professional Swimmer",
+      rating: 5,
     },
     {
       id: 3,
-      img: "/Images/Ride.png",
-      title: "Smart Mobility",
+      img: "/Images/3.avif",
+      title: "Emma Rodriguez",
       description:
-        "Next-generation transportation solutions. Experience seamless connectivity, intelligent navigation, and enhanced safety features in our revolutionary mobility platform.",
+        "The smart mobility platform revolutionized my daily commute. Intelligent navigation and safety features give me peace of mind. It's like having a personal assistant for transportation.",
+      role: "Urban Commuter",
+      rating: 5,
     },
     {
       id: 4,
-      img: "/Images/Cosmetic.png",
-      title: "Beauty & Wellness",
+      img: "/Images/4.avif",
+      title: "Lisa Thompson",
       description:
-        "Personalized beauty and wellness solutions. Discover AI-powered skincare analysis, customized treatment plans, and innovative beauty technologies for optimal self-care.",
+        "Symbionic's beauty and wellness solutions are game-changing. The AI-powered skincare analysis was spot-on, and the customized treatments delivered results beyond my expectations.",
+      role: "Beauty Blogger",
+      rating: 5,
     },
     {
       id: 5,
-      img: "/Images/Utility.png",
-      title: "Smart Utilities",
+      img: "/Images/lady.jpg",
+      title: "David Park",
       description:
-        "Intelligent utility management systems. Optimize energy consumption, monitor usage patterns, and reduce costs with our smart home automation and utility control solutions.",
+        "Our smart utility management reduced energy costs by 40% in the first month. The automation and monitoring capabilities are incredibly sophisticated yet easy to use.",
+      role: "Homeowner",
+      rating: 5,
     },
     {
       id: 6,
-      img: "/Images/Hook.png",
-      title: "IoT Connectivity",
+      img: "/Images/two.jpg",
+      title: "Rachel Green",
       description:
-        "Seamless device integration and connectivity. Connect all your smart devices through our unified platform for enhanced automation and intelligent home management.",
+        "The IoT connectivity platform seamlessly integrated all our smart devices. Home automation has never been this intuitive and reliable. Truly impressive technology!",
+      role: "Tech Professional",
+      rating: 5,
     },
   ];
 
-  const productHighlights = [
-    "🚀 Advanced AI-powered product ecosystem",
-    "🔗 Seamless cross-platform integration",
-    "📊 Real-time analytics and insights",
-    "🛡️ Enterprise-grade security protocols",
-    "⚡ Lightning-fast performance optimization",
-    "🌍 Global cloud infrastructure",
-    "🔧 Customizable solutions for every need",
-    "📱 Mobile-first responsive design",
+  const testimonialHighlights = [
+    "⭐ 98% customer satisfaction rate",
+    "🎯 500+ successful implementations",
+    "� Trusted by Fortune 500 companies",
+    "🌟 Award-winning customer support",
+    "📈 Average 40% performance improvement",
+    "🔒 100% data security guarantee",
+    "� 24/7 technical assistance",
+    "🌍 Serving clients in 50+ countries",
   ];
 
   const stackConfiguration = {
@@ -78,15 +90,15 @@ const AllProducts = () => {
   return (
     <div className="min-h-screen">
       <CustomPage
-        title="Symbionic Product Showcase"
+        title="Customer Testimonials"
         heading={{
-          preText: "Explore Our ",
-          highlightedText: "Revolutionary Products",
-          postText: " & Solutions",
+          preText: "What Our ",
+          highlightedText: "Customers ",
+          postText: "Say About Us",
         }}
-        description="Discover Symbionic's comprehensive suite of innovative products designed to transform your digital experience. From fitness tracking to smart utilities, our AI-powered solutions integrate seamlessly into your lifestyle, providing intelligent automation and unprecedented convenience."
-        features={productFeatures}
-        highlights={productHighlights}
+        description="Discover real stories from satisfied customers who have transformed their experiences with Symbionic's innovative solutions. From fitness enthusiasts to tech professionals, see how our AI-powered products have made a meaningful impact in their lives."
+        features={testimonialFeatures}
+        highlights={testimonialHighlights}
         stackConfig={stackConfiguration}
         theme={{
           primary: "orange",
@@ -105,7 +117,7 @@ const AllProducts = () => {
         }}
       />
 
-      {/* Additional Product Information Section */}
+      {/* Additional Testimonial Information Section */}
     </div>
   );
 };

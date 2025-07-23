@@ -168,7 +168,7 @@ export default function About() {
   }, []);
 
   return (
-    <div ref={main} className="font-inter antialiased text-gray-200 bg-black">
+    <div id="about" ref={main} className="font-inter antialiased text-gray-200 bg-black">
       <Hero />
       <Spark scene1Ref={scene1Ref} />
       <Genesis scene2Ref={scene2Ref} />
