@@ -11,6 +11,7 @@ import Product from "./Sections/Product";
 import Contact from "./Sections/Contact";
 import Footer from "./Sections/Footer";
 import AllProducts from "./Sections/AllProducts";
+import Partner from "./Sections/Partner";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -44,6 +45,7 @@ function App() {
                 <About />
                 <Product/>
                 <AllProducts/>
+                <Partner/>
                 <Contact/>    
                 <Footer/>
               </>
